@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, Picker, Text, View } from "react-native";
 import ChevronIcon from "../../assets/img/back.png";
 import Book from "../../assets/img/openMenu.png";
@@ -25,15 +25,17 @@ import {
     TableStatus
 } from "./styles";
 
-export default function Table({ data, remove }) {
+export default function Table({ data, remove, attStatus }) {
     const [modalTableVisible, setModalTableVisible] = useState(false);
     const [modalOptionsVisible, setModalOptionsVisible] = useState(false);
     const [status, setStatus] = useState("Livre");
-    const [statusOpt, setStatusOpt] = useState([
-        { value: "Livre" },
-        { value: "Finalizado" },
-        { value: "Limpar" }
+    const [statusOpt] = useState([
+        { value: "Livre", color: "green" },
+        { value: "Finalizado", color: "red" },
+        { value: "Limpar", color: "#FFD700" }
     ]);
+
+    useEffect(() => {}, [status]);
 
     function openTable() {
         setModalTableVisible(true);
@@ -52,8 +54,8 @@ export default function Table({ data, remove }) {
     function tempOcupado() {
         setStatus("Finalizado");
     }
-    function tempLimpar() {
-        setStatus("Limpar");
+    function changeStatus(item) {
+        attStatus(data.key, item);
     }
 
     function dropTable() {
@@ -70,13 +72,14 @@ export default function Table({ data, remove }) {
                 style={{
                     width: 120
                 }}
-                selectedValue={status}
-                onValueChange={itemValue => setStatus(itemValue)}
+                selectedValue={data.status}
+                onValueChange={itemValue => changeStatus(itemValue)}
             >
                 {statusOpt.map(value => (
                     <Picker.Item
                         key={value.value}
                         label={value.value}
+                        color={value.color}
                         value={value.value}
                     />
                 ))}

@@ -17,7 +17,7 @@ export default function Home({ navigation }) {
     function loadList() {
         AsyncStorage.getItem("tables").then(res => {
             if (res != "" && res != null) {
-                const tablesJson = JSON.parse(res);
+                let tablesJson = JSON.parse(res);
                 setTables(tablesJson);
             }
         });
@@ -36,7 +36,7 @@ export default function Home({ navigation }) {
         headerLeft: () => (
             <MenuBtn
                 onPress={() => {
-                    alert("Abrir Menu");
+                    AsyncStorage.removeItem("tables");
                 }}
             >
                 <Image
@@ -49,7 +49,7 @@ export default function Home({ navigation }) {
 
     function EndList(id) {
         AsyncStorage.getItem("tables").then(res => {
-            const tablesJson = JSON.parse(res);
+            let tablesJson = JSON.parse(res);
 
             for (const i in tablesJson) {
                 if (tablesJson[i].key == id) {
@@ -57,7 +57,7 @@ export default function Home({ navigation }) {
                 }
             }
 
-            const tablesSTR = JSON.stringify(tablesJson);
+            let tablesSTR = JSON.stringify(tablesJson);
             AsyncStorage.setItem("tables", tablesSTR);
 
             setTables(tablesJson);
@@ -66,13 +66,33 @@ export default function Home({ navigation }) {
 
     function AddingTable() {
         AsyncStorage.getItem("tables").then(res => {
-            const tablesJson = JSON.parse(res);
+            let tablesJson = JSON.parse(res);
             tablesJson.push({
                 key: Math.random().toString(),
-                number: Math.floor(Math.random() * 100)
+                number: Math.floor(Math.random() * 100),
+                status: "Livre"
             });
 
-            const tablesSTR = JSON.stringify(tablesJson);
+            let tablesSTR = JSON.stringify(tablesJson);
+            AsyncStorage.setItem("tables", tablesSTR);
+
+            setTables(tablesJson);
+        });
+    }
+
+    function attStatus(id, status) {
+        AsyncStorage.getItem("tables").then(res => {
+            //Transformo a string em Json
+            let tablesJson = JSON.parse(res);
+
+            for (let i in tablesJson) {
+                if (tablesJson[i].key == id) {
+                    tablesJson[i].status = status;
+                }
+            }
+
+            //transforma o json em string
+            let tablesSTR = JSON.stringify(tablesJson);
             AsyncStorage.setItem("tables", tablesSTR);
 
             setTables(tablesJson);
@@ -92,7 +112,11 @@ export default function Home({ navigation }) {
                 <FlatList
                     data={tables}
                     renderItem={({ item }) => (
-                        <Table remove={EndList} data={item} />
+                        <Table
+                            attStatus={attStatus}
+                            remove={EndList}
+                            data={item}
+                        />
                     )}
                     keyExtractor={item => item.key}
                 />

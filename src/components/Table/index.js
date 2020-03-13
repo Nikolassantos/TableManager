@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Text, View } from "react-native";
+import { Modal, Picker, Text, View } from "react-native";
 import ChevronIcon from "../../assets/img/back.png";
 import Book from "../../assets/img/openMenu.png";
 import SettingsIcon from "../../assets/img/settings.png";
@@ -19,7 +19,6 @@ import {
     OptionsIcon,
     OptionsModal,
     OptionText,
-    StatusText,
     TableBox,
     TableImage,
     TableNumber,
@@ -30,6 +29,11 @@ export default function Table({ data, remove }) {
     const [modalTableVisible, setModalTableVisible] = useState(false);
     const [modalOptionsVisible, setModalOptionsVisible] = useState(false);
     const [status, setStatus] = useState("Livre");
+    const [statusOpt, setStatusOpt] = useState([
+        { value: "Livre" },
+        { value: "Finalizado" },
+        { value: "Limpar" }
+    ]);
 
     function openTable() {
         setModalTableVisible(true);
@@ -59,13 +63,25 @@ export default function Table({ data, remove }) {
     }
 
     function CheckStatus() {
-        if (status == "Livre") {
-            return <Text>{status}</Text>;
-        } else if (status == "Finalizado") {
-            return <Text style={{ color: "red" }}>{status}</Text>;
-        } else if (status == "Limpar") {
-            return <Text style={{ color: "#FFD700" }}>{status}</Text>;
-        }
+        return (
+            <Picker
+                mode="dialog"
+                prompt="Escolha o status da mesa"
+                style={{
+                    width: 120
+                }}
+                selectedValue={status}
+                onValueChange={itemValue => setStatus(itemValue)}
+            >
+                {statusOpt.map(value => (
+                    <Picker.Item
+                        key={value.value}
+                        label={value.value}
+                        value={value.value}
+                    />
+                ))}
+            </Picker>
+        );
     }
 
     return (
@@ -134,9 +150,7 @@ export default function Table({ data, remove }) {
                 <TableImage source={TableIcon} />
             </TableBox>
             <TableStatus>
-                <StatusText>
-                    <CheckStatus />
-                </StatusText>
+                <CheckStatus />
             </TableStatus>
             <View style={{ flex: 1 }}>
                 <OpenTable onPress={openTable}>

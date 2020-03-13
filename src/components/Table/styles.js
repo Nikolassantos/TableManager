@@ -5,7 +5,7 @@ export const Container = styled.View`
     background: #ffe4c4;
     align-items: center;
     justify-content: center;
-    border-bottom-color: #333;
+    border-bottom-color: #ddd;
     border-bottom-width: 1px;
     flex-direction: row;
 `;
@@ -90,6 +90,9 @@ export const TableStatus = styled.View`
     align-items: center;
     justify-content: center;
     background: #fff0f5;
+`;
+export const ContainerPicker = styled.View`
+    background: red;
 `;
 export const OptionText = styled.Text`
     font-size: 22px;

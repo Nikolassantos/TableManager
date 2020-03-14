@@ -5,8 +5,8 @@ export const Container = styled.View`
     background: #ffe4c4;
     align-items: center;
     justify-content: center;
-    border-bottom-color: #ddd;
-    border-bottom-width: 1px;
+    border-top-color: #fafafa;
+    border-top-width: 1px;
     flex-direction: row;
 `;
 export const TableNumber = styled.Text`
@@ -84,12 +84,13 @@ export const OptionSelect = styled.View`
 export const TableStatus = styled.View`
     flex: 1;
     height: 30px;
-    border-width: 5px;
+    border-width: 2px;
     padding: 15px 0;
-    border-color: #5a2328;
+    border-color: #333;
     align-items: center;
     justify-content: center;
     background: #fff0f5;
+    border-radius: 5px;
 `;
 export const ContainerPicker = styled.View`
     background: red;
@@ -98,4 +99,13 @@ export const OptionText = styled.Text`
     font-size: 22px;
     font-weight: bold;
     color: #fff;
+`;
+export const TableView = styled.View`
+    background: #222;
+    width: 64px;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: -5px;
+    border-color: #a0522d;
+    border-width: 3px;
 `;

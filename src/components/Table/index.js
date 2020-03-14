@@ -13,10 +13,12 @@ import {
     TableBox,
     TableImage,
     TableNumber,
-    TableStatus
+    TableStatus,
+    TableView
 } from "./styles";
 
 export default function Table({ data, remove, attStatus }) {
+    const AsyncGetTables = AsyncStorage.getItem("tables");
     const [modalTableVisible, setModalTableVisible] = useState(false);
     const [modalOptionsVisible, setModalOptionsVisible] = useState(false);
     const [status, setStatus] = useState("Livre");
@@ -27,7 +29,7 @@ export default function Table({ data, remove, attStatus }) {
     ]);
 
     useEffect(() => {
-        AsyncStorage.getItem("tables").then(res => {
+        AsyncGetTables.then(res => {
             //Transformo a string em Json
             let tablesJson = JSON.parse(res);
 
@@ -59,7 +61,7 @@ export default function Table({ data, remove, attStatus }) {
     function changeStatus(item) {
         attStatus(data.key, item);
         setStatus(item);
-        AsyncStorage.getItem("tables").then(res => {
+        AsyncGetTables.then(res => {
             let tablesJson = JSON.parse(res);
 
             for (let i in tablesJson) {
@@ -119,19 +121,9 @@ export default function Table({ data, remove, attStatus }) {
             />
 
             <TableBox>
-                <View
-                    style={{
-                        backgroundColor: "#222",
-                        width: 64,
-                        alignItems: "center",
-                        marginTop: 10,
-                        marginBottom: -5,
-                        borderColor: "#A0522D",
-                        borderWidth: 3
-                    }}
-                >
+                <TableView>
                     <TableNumber>{data.number}</TableNumber>
-                </View>
+                </TableView>
 
                 <TableImage source={TableIcon} />
             </TableBox>

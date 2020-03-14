@@ -100,3 +100,12 @@ export const OptionText = styled.Text`
     font-weight: bold;
     color: #fff;
 `;
+export const TableView = styled.View`
+    background: #222;
+    width: 64px;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: -5px;
+    border-color: #a0522d;
+    border-width: 3px;
+`;

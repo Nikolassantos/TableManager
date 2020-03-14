@@ -54,10 +54,6 @@ export default function Table({ data, remove, attStatus }) {
     function closeSettings() {
         setModalOptionsVisible(false);
     }
-
-    function tempOcupado() {
-        setStatus("Finalizado");
-    }
     function changeStatus(item) {
         attStatus(data.key, item);
         setStatus(item);

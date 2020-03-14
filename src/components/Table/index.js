@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Modal, Picker, Text, View } from "react-native";
+import { AsyncStorage, Modal, Picker, Text, View } from "react-native";
 import ChevronIcon from "../../assets/img/back.png";
 import Book from "../../assets/img/openMenu.png";
 import SettingsIcon from "../../assets/img/settings.png";
@@ -35,7 +35,18 @@ export default function Table({ data, remove, attStatus }) {
         { value: "Limpar", color: "#FFD700" }
     ]);
 
-    useEffect(() => {}, [status]);
+    useEffect(() => {
+        AsyncStorage.getItem("tables").then(res => {
+            //Transformo a string em Json
+            let tablesJson = JSON.parse(res);
+
+            for (let i in tablesJson) {
+                if (tablesJson[i].key == data.key) {
+                    setStatus(tablesJson[i].status);
+                }
+            }
+        });
+    }, []);
 
     function openTable() {
         setModalTableVisible(true);
@@ -56,6 +67,15 @@ export default function Table({ data, remove, attStatus }) {
     }
     function changeStatus(item) {
         attStatus(data.key, item);
+        AsyncStorage.getItem("tables").then(res => {
+            let tablesJson = JSON.parse(res);
+
+            for (let i in tablesJson) {
+                if (tablesJson[i].key == data.key) {
+                    setStatus(item);
+                }
+            }
+        });
     }
 
     function dropTable() {
@@ -72,7 +92,7 @@ export default function Table({ data, remove, attStatus }) {
                 style={{
                     width: 120
                 }}
-                selectedValue={data.status}
+                selectedValue={status}
                 onValueChange={itemValue => changeStatus(itemValue)}
             >
                 {statusOpt.map(value => (

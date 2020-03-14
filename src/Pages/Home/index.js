@@ -95,7 +95,7 @@ export default function Home({ navigation }) {
             let tablesSTR = JSON.stringify(tablesJson);
             AsyncStorage.setItem("tables", tablesSTR);
 
-            setTables(tablesJson);
+            // setTables(tablesJson);
         });
     }
 

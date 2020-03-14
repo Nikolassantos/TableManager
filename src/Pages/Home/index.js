@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { AsyncStorage, FlatList, Image } from "react-native";
+import Filter from "../../assets/img/filter.png";
 import Menu from "../../assets/img/menu.png";
 import Table from "../../components/Table";
 import {
     AddTable,
     AddTableBox,
+    AddTableContainer,
     AddTableText,
     Container,
     EmptyTableText,
@@ -13,6 +15,17 @@ import {
 
 export default function Home({ navigation }) {
     const [tables, setTables] = useState([]);
+    const [sort, setSort] = useState("desc");
+
+    function sortByAsc(object) {
+        //Do maior para o menor
+        object.sort((a, b) => b.number - a.number);
+    }
+
+    function sortByDesc(object) {
+        //Do menor para o maior
+        object.sort((a, b) => a.number - b.number);
+    }
 
     function loadList() {
         AsyncStorage.getItem("tables").then(res => {
@@ -44,6 +57,28 @@ export default function Home({ navigation }) {
                     style={{ marginLeft: 10, width: 24, height: 24 }}
                 />
             </MenuBtn>
+        ),
+        headerRight: () => (
+            <MenuBtn
+                onPress={() => {
+                    let tablesJson = tables;
+
+                    if (sort == "desc") {
+                        sortByAsc(tablesJson);
+                        setTables(tablesJson);
+                        setSort("asc");
+                    } else if (sort == "asc") {
+                        sortByDesc(tablesJson);
+                        setTables(tablesJson);
+                        setSort("desc");
+                    }
+                }}
+            >
+                <Image
+                    source={Filter}
+                    style={{ marginRight: 10, width: 24, height: 24 }}
+                />
+            </MenuBtn>
         )
     });
 
@@ -69,7 +104,7 @@ export default function Home({ navigation }) {
             let tablesJson = JSON.parse(res);
             tablesJson.push({
                 key: Math.random().toString(),
-                number: Math.floor(Math.random() * 100),
+                number: tables.length + 1,
                 status: "Livre"
             });
 
@@ -127,11 +162,13 @@ export default function Home({ navigation }) {
     return (
         <>
             <RenderTables />
-            <AddTable onPress={AddingTable}>
-                <AddTableBox>
-                    <AddTableText>+</AddTableText>
-                </AddTableBox>
-            </AddTable>
+            <AddTableContainer>
+                <AddTable onPress={AddingTable}>
+                    <AddTableBox>
+                        <AddTableText>+</AddTableText>
+                    </AddTableBox>
+                </AddTable>
+            </AddTableContainer>
         </>
     );
 }

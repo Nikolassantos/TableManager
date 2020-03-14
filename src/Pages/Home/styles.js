@@ -4,12 +4,18 @@ export const Container = styled.View`
     flex: 1;
     background: #ffe4c4;
 `;
+export const AddTableContainer = styled.View`
+    background: #ffe4c4;
+    height: 60px;
+    align-items: center;
+    justify-content: center;
+`;
 export const AddTableBox = styled.View`
     background: #ee2121;
-    height: 40px;
+    height: 50px;
+    width: 50px;
     justify-content: center;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    border-radius: 25px;
 `;
 export const EmptyTableText = styled.Text``;
 

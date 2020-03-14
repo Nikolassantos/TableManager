@@ -1,24 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { AsyncStorage, Modal, Picker, Text, View } from "react-native";
+import { AsyncStorage, Picker, View } from "react-native";
 import ChevronIcon from "../../assets/img/back.png";
 import Book from "../../assets/img/openMenu.png";
 import SettingsIcon from "../../assets/img/settings.png";
 import TableIcon from "../../assets/img/table.png";
+import { ModalOptions, ModalTable } from "./modals";
 import {
-    BackIcon,
-    CloseModal,
     Container,
-    ContainerModal,
-    ModalHeader,
     OpenMenuIcon,
     OpenTable,
     OpenTableBox,
-    OptionBtn,
-    OptionsContainer,
-    OptionSelect,
-    OptionsIcon,
-    OptionsModal,
-    OptionText,
     TableBox,
     TableImage,
     TableNumber,
@@ -67,6 +58,7 @@ export default function Table({ data, remove, attStatus }) {
     }
     function changeStatus(item) {
         attStatus(data.key, item);
+        setStatus(item);
         AsyncStorage.getItem("tables").then(res => {
             let tablesJson = JSON.parse(res);
 
@@ -109,51 +101,22 @@ export default function Table({ data, remove, attStatus }) {
 
     return (
         <Container>
-            <Modal animationType="slide" visible={modalTableVisible}>
-                <ContainerModal>
-                    <ModalHeader>
-                        <CloseModal onPress={closeTable}>
-                            <BackIcon source={ChevronIcon} />
-                        </CloseModal>
-
-                        <Text
-                            style={{
-                                fontSize: 26,
-                                color: "white",
-                                textAlign: "center"
-                            }}
-                        >
-                            Mesa {data.number}
-                        </Text>
-                        <OptionsModal onPress={openSettings}>
-                            <OptionsIcon source={SettingsIcon} />
-                        </OptionsModal>
-                    </ModalHeader>
-                </ContainerModal>
-            </Modal>
-            <Modal animationType="fade" visible={modalOptionsVisible}>
-                <OptionsContainer>
-                    <OptionBtn
-                        onPress={() => {
-                            alert("Alterar Mesa");
-                        }}
-                    >
-                        <OptionSelect>
-                            <OptionText>Alterar Mesa</OptionText>
-                        </OptionSelect>
-                    </OptionBtn>
-                    <OptionBtn onPress={dropTable}>
-                        <OptionSelect>
-                            <OptionText>Excluir Mesa</OptionText>
-                        </OptionSelect>
-                    </OptionBtn>
-                    <OptionBtn onPress={closeSettings}>
-                        <OptionSelect>
-                            <OptionText>Voltar</OptionText>
-                        </OptionSelect>
-                    </OptionBtn>
-                </OptionsContainer>
-            </Modal>
+            <ModalTable
+                data={data}
+                visible={modalTableVisible}
+                optIcon={SettingsIcon}
+                backIcon={ChevronIcon}
+                onPressOptions={openSettings}
+                onPressClose={closeTable}
+            />
+            <ModalOptions
+                visible={modalOptionsVisible}
+                onPressAlt={() => {
+                    alert("Alterar Mesa");
+                }}
+                onPressDelete={dropTable}
+                onPressClose={closeSettings}
+            />
 
             <TableBox>
                 <View

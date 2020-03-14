@@ -5,8 +5,8 @@ export const Container = styled.View`
     background: #ffe4c4;
     align-items: center;
     justify-content: center;
-    border-bottom-color: #ddd;
-    border-bottom-width: 1px;
+    border-top-color: #fafafa;
+    border-top-width: 1px;
     flex-direction: row;
 `;
 export const TableNumber = styled.Text`
@@ -84,12 +84,13 @@ export const OptionSelect = styled.View`
 export const TableStatus = styled.View`
     flex: 1;
     height: 30px;
-    border-width: 5px;
+    border-width: 2px;
     padding: 15px 0;
-    border-color: #5a2328;
+    border-color: #333;
     align-items: center;
     justify-content: center;
     background: #fff0f5;
+    border-radius: 5px;
 `;
 export const ContainerPicker = styled.View`
     background: red;

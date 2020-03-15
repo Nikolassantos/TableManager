@@ -24,7 +24,7 @@ This app features all the latest tools and practices in mobile development!
 ## Getting started
 
 1. Clone this repo using `git clone github.com/Nikolassantos/TableManager.git`
-2. Move yourself to the appropriate directory: `cd tableMAanager`<br />
+2. Move yourself to the appropriate directory: `cd tableManager`<br />
 3. Run `yarn` to install dependencies<br />
 
 ### Getting started with the backend server

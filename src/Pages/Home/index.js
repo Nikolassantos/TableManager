@@ -63,7 +63,6 @@ export default function Home({ navigation }) {
     }
 
     useEffect(() => {
-        console.log(sort);
         //Backup
         // AsyncStorage.removeItem("tables");
         // AsyncStorage.setItem("tables", JSON.stringify(tables));
@@ -233,17 +232,16 @@ export default function Home({ navigation }) {
                     style={{
                         flex: 2,
                         width: 230,
-                        backgroundColor: "#ee2121",
-                        borderRightWidth: 3,
-                        borderTopWidth: 3,
-                        borderBottomWidth: 3,
-                        borderColor: "#ee2121",
+                        backgroundColor: "#A52A2A",
                         borderBottomRightRadius: 5
                     }}
                 >
                     <AsideMenuBtn
                         menuText="Adicionar Categorias"
-                        onPress={() => {}}
+                        onPress={() => {
+                            setShowMenu(false);
+                            navigation.navigate("AddCategory");
+                        }}
                     />
                     <AsideMenuBtn
                         menuText="Adicionar Produtos"

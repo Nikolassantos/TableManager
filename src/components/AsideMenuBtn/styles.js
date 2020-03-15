@@ -7,7 +7,7 @@ export const MenuContainer = styled.View`
     border-color: #fff;
     border-width: 1px;
     height: 40px;
-    margin: 3px 3px;
+    margin: 3px;
     border-radius: 3px;
 `;
 export const MenuText = styled.Text`

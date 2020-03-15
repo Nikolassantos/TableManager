@@ -5,7 +5,8 @@ import {
     FlatList,
     Image,
     Text,
-    View
+    View,
+    Alert
 } from "react-native";
 import Modal from "react-native-modal";
 import AddButton from "../../assets/img/addButton.png";
@@ -235,7 +236,11 @@ export default function Home({ navigation }) {
                     >
                         <View >
                             <View>
-
+                                <View style={{ alignItems:'center', padding:5}} >
+                                    <Text style={{color: "#000",fontSize: 20,fontWeight: "bold"}}  >
+                                        Sobre nós
+                                    </Text>
+                                </View>
                             </View>
                             <View style={{justifyContent: "center",alignItems: "center",backgroundColor: "#333",height: 40}} >
                             <Text style={{color: "#fff",fontSize: 20,fontWeight: "bold"}} >

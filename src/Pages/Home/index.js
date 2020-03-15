@@ -209,14 +209,9 @@ export default function Home({ navigation }) {
                 swipeDirection="left"
             >
                 <View
-                    style={{
-                        flex: 1,
-                        width: 230,
-                        backgroundColor: "#fff",
-                        justifyContent: "flex-end"
-                    }}
+                    style={{flex: 1,width: 230,backgroundColor: "#fff",justifyContent: "flex-end"}}
                 >
-                    <MenuBtn
+                    <MenuBtn 
                         onPress={() => {
                             AsyncGetTables.then(res => {
                                 let tablesJson = JSON.parse(res);
@@ -238,23 +233,15 @@ export default function Home({ navigation }) {
                             });
                         }}
                     >
-                        <View
-                            style={{
-                                justifyContent: "center",
-                                alignItems: "center",
-                                backgroundColor: "#333",
-                                height: 40
-                            }}
-                        >
-                            <Text
-                                style={{
-                                    color: "#fff",
-                                    fontSize: 20,
-                                    fontWeight: "bold"
-                                }}
-                            >
-                                Resetar Mesas
+                        <View >
+                            <View>
+
+                            </View>
+                            <View style={{justifyContent: "center",alignItems: "center",backgroundColor: "#333",height: 40}} >
+                            <Text style={{color: "#fff",fontSize: 20,fontWeight: "bold"}} >
+                                Resetar as mesas
                             </Text>
+                            </View>
                         </View>
                     </MenuBtn>
                 </View>

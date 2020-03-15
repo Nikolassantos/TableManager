@@ -1,24 +1,28 @@
 import React from "react";
 import { Modal, Text } from "react-native";
+import backIcon from "../../assets/img/back.png";
 import {
+    AddCategoryContainer,
     BackIcon,
     CloseModal,
     ContainerModal,
+    ImageCategory,
+    ImageContainer,
+    InputsContainer,
     ModalHeader,
+    NameCategory,
     OptionBtn,
     OptionsContainer,
     OptionSelect,
     OptionsIcon,
     OptionsModal,
     OptionText
-} from "./modalStyles";
+} from "./styles";
 
 export const ModalTable = ({
-    data,
     visible,
     onPressOptions,
     onPressClose,
-    backIcon,
     optIcon
 }) => {
     return (
@@ -36,7 +40,7 @@ export const ModalTable = ({
                             textAlign: "center"
                         }}
                     >
-                        Mesa {data.number}
+                        Pedidos
                     </Text>
                     <OptionsModal onPress={onPressOptions}>
                         <OptionsIcon source={optIcon} />
@@ -72,6 +76,29 @@ export const ModalOptions = ({
                     </OptionSelect>
                 </OptionBtn>
             </OptionsContainer>
+        </Modal>
+    );
+};
+
+export const ModalAddCategory = ({ visible, onPress }) => {
+    return (
+        <Modal visible={visible}>
+            <AddCategoryContainer>
+                <CloseModal onPress={onPress}>
+                    <BackIcon source={backIcon} />
+                </CloseModal>
+                <ImageContainer>
+                    <ImageCategory
+                        source={{
+                            uri:
+                                "https://lh3.googleusercontent.com/proxy/oqCMMaw6znTG2TZTcpf22-Zm8lXVSxTlX9DHOpnHsQonnMUgXzUkjZzV4emn-2i281aaE47WKnJazEA_UTcQvP-MqadLP4HltENGVyOf9c9mQhnt"
+                        }}
+                    />
+                </ImageContainer>
+                <InputsContainer>
+                    <NameCategory placeholder="Adicione o nome da categoria" />
+                </InputsContainer>
+            </AddCategoryContainer>
         </Modal>
     );
 };

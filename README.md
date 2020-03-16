@@ -2,7 +2,9 @@
 Table Manager
 </h1>
 
-<p align="center">App desenvolvido com a finalidade de ajudar pessoas que necessitam atender mesas com agilidade e praticidade.</p>
+<p align="center">Application developed with the purpose of helping people who need to meet tables with agility and practicality.
+
+</p>
 
 <p align="center">
   <a href="https://opensource.org/licenses/MIT">

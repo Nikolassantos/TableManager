@@ -33,15 +33,6 @@ export default function Home({ navigation }) {
     const [showMenu, setShowMenu] = useState(false);
     const AsyncGetTables = AsyncStorage.getItem("tables");
 
- const sideMenuVisualition = {
-        alignItems:'center',
-        padding:5,
-    };
-    const sideTextVisualition = {
-        color: "#000",fontSize: 20,
-        fontWeight: "bold"
-    };
-
     function sortByAsc(object) {
         //Do maior para o menor
         object.sort((a, b) => b.number - a.number);
@@ -129,7 +120,7 @@ export default function Home({ navigation }) {
                 let tablesJson = JSON.parse(res);
                 tablesJson.push({
                     key: Math.random().toString(),
-                    number: tables.length + 1,
+                    number: tables.length + 2,
                     status: "Livre"
                 });
 
@@ -222,6 +213,7 @@ export default function Home({ navigation }) {
                 animationIn="slideInLeft"
                 animationOut="slideOutLeft"
                 coverScreen={true}
+                coverScreen={true}
                 onBackdropPress={() => setShowMenu(false)}
                 isVisible={showMenu}
                 onSwipeComplete={() => setShowMenu(false)}
@@ -250,30 +242,17 @@ export default function Home({ navigation }) {
                             setShowMenu(false);
                             navigation.navigate("AddCategory");
                         }}
-                    >
-                        <View >
-                            <View>
-                                <View style={sideMenuVisualition}>
-                                    <Text style={sideTextVisualition}  >
-                                        Avaliação do App
-                                    </Text>
-                                </View>
-
-                                
-
-                                <View style={sideMenuVisualition}>
-                                    <Text style={sideTextVisualition}  >
-                                        Sobre
-                                    </Text>
-                                </View>
-                            </View>
-                            <View style={{justifyContent: "center",alignItems: "center",backgroundColor: "#333",height: 40}} >
-                            <Text style={{color: "#fff",fontSize: 20,fontWeight: "bold"}} >
-                                Resetar as mesas
-                            </Text>
-                            </View>
-                        </View>
-                    </MenuBtn>
+                    />
+                    <AsideMenuBtn
+                        menuText="Adicionar Produtos"
+                        onPress={() => {}}
+                    />
+                    <AsideMenuBtn menuText="Configurações" onPress={() => {}} />
+                    <AsideMenuBtn menuText="Avaliar o app" onPress={() => {}} />
+                    <AsideMenuBtn
+                        menuText="Remover Mesas"
+                        onPress={ResetTables}
+                    />
                 </View>
             </Modal>
             <RenderTables />

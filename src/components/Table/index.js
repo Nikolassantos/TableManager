@@ -4,7 +4,7 @@ import ChevronIcon from "../../assets/img/back.png";
 import Book from "../../assets/img/openMenu.png";
 import SettingsIcon from "../../assets/img/settings.png";
 import TableIcon from "../../assets/img/table.png";
-import { ModalOptions, ModalTable } from "./modals";
+import { ModalOptions, ModalTable } from "../Modal";
 import {
     Container,
     OpenMenuIcon,
@@ -53,10 +53,6 @@ export default function Table({ data, remove, attStatus }) {
     }
     function closeSettings() {
         setModalOptionsVisible(false);
-    }
-
-    function tempOcupado() {
-        setStatus("Finalizado");
     }
     function changeStatus(item) {
         attStatus(data.key, item);

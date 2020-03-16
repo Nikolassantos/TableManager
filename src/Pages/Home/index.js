@@ -4,14 +4,13 @@ import {
     AsyncStorage,
     FlatList,
     Image,
-    Text,
-    View,
-    Alert
+    View
 } from "react-native";
 import Modal from "react-native-modal";
 import AddButton from "../../assets/img/addButton.png";
 import Filter from "../../assets/img/filter.png";
 import Menu from "../../assets/img/menu.png";
+import AsideMenuBtn from "../../components/AsideMenuBtn";
 import Table from "../../components/Table";
 import {
     AddTable,
@@ -19,8 +18,13 @@ import {
     AddTableContainer,
     AddTableIcon,
     Container,
+    LoadContainer,
+    LoadText,
     MenuBtn,
-    MenuBtnContainer
+    MenuBtnContainer,
+    ModalUserInfo,
+    UserAvatar,
+    UserName
 } from "./styles";
 
 export default function Home({ navigation }) {
@@ -41,11 +45,15 @@ export default function Home({ navigation }) {
     function sortByAsc(object) {
         //Do maior para o menor
         object.sort((a, b) => b.number - a.number);
+        setTables(object);
+        setSort("asc");
     }
 
     function sortByDesc(object) {
         //Do menor para o maior
         object.sort((a, b) => a.number - b.number);
+        setTables(object);
+        setSort("desc");
     }
 
     function loadList() {
@@ -86,12 +94,8 @@ export default function Home({ navigation }) {
 
                     if (sort == "desc") {
                         sortByAsc(tablesJson);
-                        setTables(tablesJson);
-                        setSort("asc");
                     } else if (sort == "asc") {
                         sortByDesc(tablesJson);
-                        setTables(tablesJson);
-                        setSort("desc");
                     }
                 }}
             >
@@ -166,25 +170,10 @@ export default function Home({ navigation }) {
         if (tables.length == 0) {
             return (
                 <Container>
-                    <View
-                        style={{
-                            justifyContent: "center",
-                            alignItems: "center",
-                            flex: 1
-                        }}
-                    >
+                    <LoadContainer>
                         <ActivityIndicator size="large" color="#ee2121" />
-                        <Text
-                            style={{
-                                marginTop: 8,
-                                color: "#000",
-                                fontSize: 20,
-                                fontWeight: "bold"
-                            }}
-                        >
-                            Carregando...
-                        </Text>
-                    </View>
+                        <LoadText>Carregando...</LoadText>
+                    </LoadContainer>
                 </Container>
             );
         }
@@ -205,6 +194,27 @@ export default function Home({ navigation }) {
         );
     }
 
+    function ResetTables() {
+        AsyncGetTables.then(res => {
+            let tablesJson = JSON.parse(res);
+
+            for (let i in tablesJson) {
+                tablesJson.splice(i);
+            }
+
+            tablesJson.push({
+                key: Math.random().toString(),
+                number: 1,
+                status: "Livre"
+            });
+
+            let tablesSTR = JSON.stringify(tablesJson);
+            AsyncStorage.setItem("tables", tablesSTR);
+
+            setTables(tablesJson);
+        });
+    }
+
     return (
         <>
             <Modal
@@ -212,35 +222,33 @@ export default function Home({ navigation }) {
                 animationIn="slideInLeft"
                 animationOut="slideOutLeft"
                 coverScreen={true}
-                coverScreen={true}
                 onBackdropPress={() => setShowMenu(false)}
                 isVisible={showMenu}
                 onSwipeComplete={() => setShowMenu(false)}
                 swipeDirection="left"
             >
+                <ModalUserInfo>
+                    <UserAvatar
+                        source={{
+                            uri:
+                                "https://wedologos.bladecdn.net/wp-content/uploads/2016/01/logo-restaurante-9.jpg"
+                        }}
+                    />
+                    <UserName>La Casona</UserName>
+                </ModalUserInfo>
                 <View
-                    style={{flex: 1,width: 230,backgroundColor: "#fff",justifyContent: "flex-end"}}
+                    style={{
+                        flex: 2,
+                        width: 230,
+                        backgroundColor: "#A52A2A",
+                        borderBottomRightRadius: 5
+                    }}
                 >
-                    <MenuBtn 
+                    <AsideMenuBtn
+                        menuText="Adicionar Categorias"
                         onPress={() => {
-                            AsyncGetTables.then(res => {
-                                let tablesJson = JSON.parse(res);
-
-                                for (let i in tablesJson) {
-                                    tablesJson.splice(i);
-                                }
-
-                                tablesJson.push({
-                                    key: Math.random().toString(),
-                                    number: 1,
-                                    status: "Livre"
-                                });
-
-                                let tablesSTR = JSON.stringify(tablesJson);
-                                AsyncStorage.setItem("tables", tablesSTR);
-
-                                setTables(tablesJson);
-                            });
+                            setShowMenu(false);
+                            navigation.navigate("AddCategory");
                         }}
                     >
                         <View >

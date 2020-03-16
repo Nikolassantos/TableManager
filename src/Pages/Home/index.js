@@ -213,7 +213,6 @@ export default function Home({ navigation }) {
                 animationIn="slideInLeft"
                 animationOut="slideOutLeft"
                 coverScreen={true}
-                coverScreen={true}
                 onBackdropPress={() => setShowMenu(false)}
                 isVisible={showMenu}
                 onSwipeComplete={() => setShowMenu(false)}

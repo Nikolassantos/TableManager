@@ -29,6 +29,15 @@ export default function Home({ navigation }) {
     const [showMenu, setShowMenu] = useState(false);
     const AsyncGetTables = AsyncStorage.getItem("tables");
 
+ const sideMenuVisualition = {
+        alignItems:'center',
+        padding:5,
+    };
+    const sideTextVisualition = {
+        color: "#000",fontSize: 20,
+        fontWeight: "bold"
+    };
+
     function sortByAsc(object) {
         //Do maior para o menor
         object.sort((a, b) => b.number - a.number);
@@ -236,9 +245,17 @@ export default function Home({ navigation }) {
                     >
                         <View >
                             <View>
-                                <View style={{ alignItems:'center', padding:5}} >
-                                    <Text style={{color: "#000",fontSize: 20,fontWeight: "bold"}}  >
-                                        Sobre nós
+                                <View style={sideMenuVisualition}>
+                                    <Text style={sideTextVisualition}  >
+                                        Avaliação do App
+                                    </Text>
+                                </View>
+
+                                
+
+                                <View style={sideMenuVisualition}>
+                                    <Text style={sideTextVisualition}  >
+                                        Sobre
                                     </Text>
                                 </View>
                             </View>

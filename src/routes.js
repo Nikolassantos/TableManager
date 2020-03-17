@@ -2,6 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import AddCategory from "./Pages/AddCategory";
+import AddProducts from './Pages/AddProducts'
 import Home from "./Pages/Home";
 
 const Stack = createStackNavigator();
@@ -38,6 +39,14 @@ function App() {
                     })}
                     name="AddCategory"
                     component={AddCategory}
+                />
+                <Stack.Screen
+                    options={({ navigation }) => ({
+                        title: "AddProducts",
+                        headerShown: false
+                    })}
+                    name="AddProducts"
+                    component={AddProducts}
                 />
             </Stack.Navigator>
         </NavigationContainer>

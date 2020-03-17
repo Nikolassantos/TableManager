@@ -245,7 +245,10 @@ export default function Home({ navigation }) {
                     />
                     <AsideMenuBtn
                         menuText="Adicionar Produtos"
-                        onPress={() => {}}
+                        onPress={() => {
+                            setShowMenu(false);
+                            navigation.navigate("AddProducts");
+                        }}
                     />
                     <AsideMenuBtn menuText="Configurações" onPress={() => {}} />
                     <AsideMenuBtn menuText="Avaliar o app" onPress={() => {}} />

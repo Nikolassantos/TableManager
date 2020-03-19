@@ -6,8 +6,8 @@ import AddProducts from './Pages/AddProducts'
 import Home from "./Pages/Home";
 
 const Stack = createStackNavigator();
-const bgHeaderColor = "#EE2121";
-const txtHeaderColor = "#fff";
+const bgHeaderColor = "#22D1EE";
+const txtHeaderColor = "#0000";
 
 function App() {
     return (

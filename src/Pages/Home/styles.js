@@ -1,3 +1,9 @@
+const usedColors = {
+    Main:'#22D1EE',
+    Secondary:'#C4C4C4',
+}
+
+
 import styled from "styled-components/native";
 
 export const Container = styled.View`
